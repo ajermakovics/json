@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/ajermakovics/json.svg)](https://jitpack.io/#ajermakovics/json)
+
 # Json
 
 Convenience library for handling JSON objects in Java. Goals:
