@@ -1,4 +1,4 @@
-[![](https://jitpack.io/v/ajermakovics/json.svg)](https://jitpack.io/#ajermakovics/json)
+[![CircleCI](https://circleci.com/gh/ajermakovics/json.svg?style=svg)](https://circleci.com/gh/ajermakovics/json) [![](https://jitpack.io/v/org.andrejs/json.svg)](https://jitpack.io/#org.andrejs/json) 
 
 # Json
 
@@ -35,7 +35,7 @@ See tests for more examples.
 
 ## Download
 
-Grab it from [JitPack](https://jitpack.io/#ajermakovics/json)
+Grab it from [JitPack](https://jitpack.io/#org.andrejs/json)
 
 Json depends on Jackson
 
