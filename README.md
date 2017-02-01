@@ -8,6 +8,7 @@ Convenience library for handling JSON objects in Java. Goals:
 
 In essence `Json` is just a thin wrapper around a `Map` where properties are stored. There are lots of functions to manipulate a `Map` such as in Guava or Apache Commons, and you should be able to re-use them. Additional `Map` utilities are provided here. 
 
+```java
      Json addr = new Json() {
     	String host = "localhost";
     	int port = 80;
@@ -16,6 +17,7 @@ In essence `Json` is just a thin wrapper around a `Map` where properties are sto
     addr.toString(); 	// {"host": "localhost", "port": 80}
     addr.set("path", "/").set("proto", "http");
     addr.get("port"); 	// 80
+```
 
 See tests for more examples.	
 
@@ -37,13 +39,16 @@ Json depends on Jackson
 
 ## Constructors
 
+```java
     new Json("{port: 80}"); // from string
     new Json( hashMap );  // from map
     new Json("port", 80); // key-value
     new Json() { int port = 80; } // from fields 
+```
 
 ## Operations
 
+```java
     Json json = new Json().set("port", 80)
                           .set("host", "localhost"); // chain calls
     
@@ -54,6 +59,7 @@ Json depends on Jackson
     json.merge( anotherJson ); // merge values recursively
     
     json.copy(); // deep copy
+```
 
 As well as all the methods from `Map`:
 
@@ -63,6 +69,7 @@ As well as all the methods from `Map`:
 
 You can pass `Json` to Nashorn JavaScript functions and treat it like a native JSON object:
 
+```java
     Json addr = new Json("port", 80);
 
     scriptEngine.eval("function nextPort(addr) { addr.port++; }");
@@ -70,14 +77,14 @@ You can pass `Json` to Nashorn JavaScript functions and treat it like a native J
     invocable.invokeFunction("nextPort", addr);
 		
     out.println( addr.get("port") ); // 81
-             
+```
+
 ## Build
 
-    gradle jar
+    `./gradlew jar`
     
-Note: running tests requires JDK 8 due to Nashorn tests. Java 6 is required for compiling and building the jar.
+Note: running tests requires JDK 8 due to Nashorn tests.
 
 ## License
 
 Apache 2.0
-
