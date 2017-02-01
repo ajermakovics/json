@@ -9,6 +9,7 @@ import static java.lang.reflect.Modifier.isStatic;
 /** JSON Object **/
 public class Json extends MapBindings {
 
+	/** Empty Json object. Immutable **/
 	public static final Json EMPTY = new Json(MapOps.EMPTY_MAP);
 
 	/** Map where all the properties are stored. Nested Json objects are stored as Maps **/

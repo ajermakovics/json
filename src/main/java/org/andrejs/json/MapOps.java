@@ -5,6 +5,7 @@ import java.util.Map.Entry;
 
 import static java.util.Collections.emptyMap;
 
+/** Map operations **/
 public class MapOps {
 
 	public static Map<String, Object> EMPTY_MAP = Collections.emptyMap();
