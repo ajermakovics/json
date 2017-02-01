@@ -1,0 +1,46 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.ajoberstar:grgit:1.4.+'
+    }
+}
+ext {
+    git = org.ajoberstar.grgit.Grgit.open()
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+version ext.git.describe() ?: 'dev'
+group = 'org.andrejs'
+archivesBaseName = "json"
+jar.baseName = archivesBaseName
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Json', 'Implementation-Version': version
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.7.1'
+    testCompile 'junit:junit:4.11'
+}
+
+
+

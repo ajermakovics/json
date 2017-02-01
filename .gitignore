@@ -1,0 +1,20 @@
+*.class
+
+# IDE
+.project
+.settings
+.classpath
+bin/
+*.iml
+
+# build
+.gradle
+build/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# jvm crash logs
+hs_err_pid*
