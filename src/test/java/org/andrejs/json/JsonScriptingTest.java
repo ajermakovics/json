@@ -28,9 +28,9 @@ public class JsonScriptingTest {
 
 		Json j = new Json("a", 5);
 
-		Object result = eng.eval("a+1", j);
+		Double result = (Double) eng.eval("a+1", j);
 
-		assertEquals(6, result);
+		assertEquals(6, result.intValue());
 	}
 
 	@Test
@@ -42,7 +42,7 @@ public class JsonScriptingTest {
 
 		inv.invokeFunction("inc", j);
 
-		assertEquals(6, j.get("b", 0).intValue());
+		assertEquals(6, j.get("b", 0D).intValue());
 	}
 
 	@Test
