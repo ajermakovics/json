@@ -42,10 +42,23 @@ Json depends on Jackson
 ## Constructors
 
 ```java
-    new Json("{port: 80}"); // from string
+    new Json("{port: 80}"); // from string. quotes around field names are optional.
     new Json( hashMap );  // from map
     new Json("port", 80); // key-value
     new Json() { int port = 80; } // from fields 
+    new Json("{port: 80} // listen port"); // comments are allowed
+```
+
+## Factory methods
+
+```java
+    Json json = Json.of.url("https://status.github.com/api/status.json"); // download from url
+    Json json = Json.of.bytes(byteArray);
+    Json json = Json.of.file("/path/to/file.json");
+    Json json = Json.of.bean(beanObject);
+    Json json = Json.of.string("{port: 80}");
+    Json json = Json.of.keyVal("port" 80, "host", "localhost"); // key-value pairs
+    Json json = Json.of.stream(inputStream);
 ```
 
 ## Operations
