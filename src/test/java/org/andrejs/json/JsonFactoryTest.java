@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 
 public class JsonFactoryTest {
 
-    JsonFactory it = JsonFactory.INSTANCE;
+    private JsonFactory it = Json.of;
 
     @Test
     public void map() throws Exception {

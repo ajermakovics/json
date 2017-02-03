@@ -6,8 +6,6 @@ import java.util.Map;
 
 class JsonFactory {
 
-    static final JsonFactory INSTANCE = new JsonFactory();
-
     public Json map(Map<String, Object> map) {
         return new Json(map);
     }

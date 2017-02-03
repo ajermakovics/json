@@ -11,6 +11,7 @@ public class Json extends MapBindings {
 
 	/** Empty Json object. Immutable **/
 	public static final Json EMPTY = new Json(MapOps.EMPTY_MAP);
+	public static JsonFactory of = new JsonFactory();
 
 	/** Map where all the properties are stored. Nested Json objects are stored as Maps **/
 	Map<String, Object> map;
@@ -32,10 +33,6 @@ public class Json extends MapBindings {
 	/**  Construct a JSON Object with single key and value **/
 	public Json(String key, Object value) {
 		set(key, value);
-	}
-
-	public static JsonFactory of() {
-		return JsonFactory.INSTANCE;
 	}
 
 	@Override
