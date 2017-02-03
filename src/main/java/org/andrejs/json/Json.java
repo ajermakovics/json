@@ -34,6 +34,10 @@ public class Json extends MapBindings {
 		set(key, value);
 	}
 
+	public static JsonFactory of() {
+		return JsonFactory.INSTANCE;
+	}
+
 	@Override
 	/** Get the underlying map that stores keys and values **/
 	public Map<String, Object> toMap() {
