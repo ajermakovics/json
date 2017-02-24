@@ -4,7 +4,7 @@ package org.andrejs.json;
 import java.io.InputStream;
 import java.util.Map;
 
-class JsonFactory {
+public class JsonFactory {
 
     public Json map(Map<String, Object> map) {
         return new Json(map);
