@@ -14,7 +14,7 @@ import java.util.Map;
 
 import static com.fasterxml.jackson.core.JsonParser.Feature.*;
 
-class JsonSerializer {
+public class JsonSerializer {
 
 	final static ObjectMapper serializer = new ObjectMapper()
 		.configure(ALLOW_COMMENTS, true).configure(ALLOW_UNQUOTED_CONTROL_CHARS, true)
@@ -58,6 +58,14 @@ class JsonSerializer {
 	static Map<String, Object> readFile(String filePath) {
 		try {
 			return serializer.readValue(new File(filePath), Map.class);
+		} catch (IOException e) {
+			throw new IOError(e);
+		}
+	}
+
+	public static void writeFile(String filePath, Map<String, Object> json) {
+		try {
+			serializer.writeValue(new File(filePath), json);
 		} catch (IOException e) {
 			throw new IOError(e);
 		}
