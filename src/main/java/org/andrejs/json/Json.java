@@ -2,9 +2,11 @@ package org.andrejs.json;
 
 import java.lang.reflect.Field;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import static java.lang.reflect.Modifier.isStatic;
+import static java.util.stream.Collectors.toList;
 
 /** JSON Object **/
 public class Json extends MapBindings {
@@ -54,6 +56,11 @@ public class Json extends MapBindings {
 		return JsonSerializer.toJsonString(toMap());
 	}
 
+	/** Convert to pretty JSON string with indentation **/
+	public String toStringPretty() {
+		return JsonSerializer.toPrettyString(map);
+	}
+
 	@Override
 	public boolean equals(Object it) {
 		return (it instanceof Json) && toMap().equals( ((Json)it).toMap() );
@@ -62,6 +69,11 @@ public class Json extends MapBindings {
 	@Override
 	public int hashCode() {
 		return toMap().hashCode();
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T> T get(String key) {
+		return (T) map.get(key);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -81,6 +93,12 @@ public class Json extends MapBindings {
 	@Override
 	public Object put(String key, Object value) {
 		return toMap().put(key, unwrap(value));
+	}
+
+	public Json putArray(String arrayField, List<?> values) {
+		List<Object> vals = values.stream().map(Json::unwrap).collect(toList());
+		put(arrayField, vals);
+		return this;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -106,6 +124,19 @@ public class Json extends MapBindings {
 	public Json at(String ... keys) {
 		Map<String, Object> nested = MapOps.getNested(toMap(), keys);
 		return (nested == MapOps.EMPTY_MAP) ? EMPTY : new Json(nested);
+	}
+
+	public List<Object> getArray(String key) {
+		return get(key);
+	}
+
+	public List<Json> getObjects(String key) {
+		List<Object> array = getArray(key);
+		if(array == null)
+			return null;
+		return array.stream()
+				.map(Json.of::bean)
+				.collect(toList());
 	}
 
 	/** Create a (deep) copy of this Json. **/

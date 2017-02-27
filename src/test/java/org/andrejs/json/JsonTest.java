@@ -2,10 +2,10 @@ package org.andrejs.json;
 
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.singletonMap;
 import static org.junit.Assert.*;
 
@@ -22,7 +22,8 @@ public class JsonTest {
 	public void containsConstructorKeyValue() throws Exception {
 		Json json = new Json("key", 123);
 		assertTrue( json.containsKey("key") );
-		assertEquals(123, json.get("key"));
+		int val = json.get("key");
+		assertEquals(123, val);
 	}
 
 	@Test
@@ -41,7 +42,8 @@ public class JsonTest {
 			int key = 123;
 			String key2 = "val";
 		};
-		assertEquals(123, json.get("key"));
+		int val = json.get("key");
+		assertEquals(123, val);
 		assertEquals("val", json.get("key2"));
 	}
 
@@ -52,7 +54,7 @@ public class JsonTest {
 
 	@Test
 	public void listPropertyProducesArrayInJson() throws Exception {
-		Json json = new Json("key", Arrays.asList(1, 2));
+		Json json = new Json("key", asList(1, 2));
 		assertEquals("{\"key\":[1,2]}", json.toString());
 	}
 
@@ -111,12 +113,42 @@ public class JsonTest {
 
 	@Test
 	public void copyMakesDeepCopy() throws Exception {
-
 		Json j1 = new Json("a", new Json("b", 1));
 		Json copy = j1.copy();
 
 		assertEquals(j1, copy);
 		copy.set("c", 1);
 		assertNotSame(j1, copy);
+	}
+
+	@Test
+	public void getArray() throws Exception {
+		Json json = new Json("{key: [1, 2]}");
+		assertEquals(asList(1, 2), json.getArray("key"));
+	}
+
+	@Test
+	public void putArray() throws Exception {
+		Json json = new Json().putArray("key", asList(1, 2));
+		Json expected = new Json("{key: [1, 2]}");
+
+		assertEquals(expected, json);
+	}
+
+	@Test
+	public void getObjects() throws Exception {
+		Json o1 = new Json("a", 1), o2 = new Json("a", 2);
+		Json json = new Json("{key: [{a: 1}, {a: 2}]}");
+
+		assertEquals(asList(o1, o2), json.getObjects("key"));
+	}
+
+	@Test
+	public void putObjects() throws Exception {
+		Json o1 = new Json("a", 1), o2 = new Json("a", 2);
+		Json expected = new Json("{key: [{a: 1}, {a: 2}]}");
+		Json json = new Json().putArray("key", asList(o1, o2));
+
+		assertEquals(expected, json);
 	}
 }

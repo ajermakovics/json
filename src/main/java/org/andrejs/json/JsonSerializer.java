@@ -90,6 +90,8 @@ public class JsonSerializer {
 	@SuppressWarnings("unchecked")
 	static Map<String, Object> serialize(Object pojoBean) {
 		try {
+			if(pojoBean instanceof Map)
+				return (Map<String, Object>) pojoBean;
 			return serializer.convertValue(pojoBean, Map.class);
 		} catch (Exception e) {
 			throw new IllegalStateException(e);

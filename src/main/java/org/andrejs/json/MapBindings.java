@@ -61,6 +61,7 @@ public abstract class MapBindings implements Bindings {
 	}
 
 	@Override
+	@Deprecated
 	public Object get(Object key) {
 		return toMap().get(key);
 	}
