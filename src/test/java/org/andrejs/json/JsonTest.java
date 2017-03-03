@@ -43,6 +43,7 @@ public class JsonTest {
 			String key2 = "val";
 		};
 		int val = json.get("key");
+		System.out.println(json);
 		assertEquals(123, val);
 		assertEquals("val", json.get("key2"));
 	}

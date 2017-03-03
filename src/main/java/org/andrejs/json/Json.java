@@ -73,7 +73,7 @@ public class Json extends MapBindings {
 
 	@SuppressWarnings("unchecked")
 	public <T> T get(String key) {
-		return (T) map.get(key);
+		return (T) toMap().get(key);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -146,8 +146,10 @@ public class Json extends MapBindings {
 
 	/** Read declared field values using reflection **/
 	Map<String, Object> readFields() {
-		Map<String, Object> fieldVals = new LinkedHashMap<String, Object>();
+		Map<String, Object> fieldVals = new LinkedHashMap<>();
 		for(Field f: getClass().getDeclaredFields()) {
+			if(f.getName().contains("$"))
+				continue;
 			Object val = JsonSerializer.getFieldValue(f, this);
 			if( val != null && !isStatic(f.getModifiers()) )
 				fieldVals.put( f.getName() , val);
