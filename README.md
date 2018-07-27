@@ -11,7 +11,7 @@ Convenience library for handling JSON objects in Java. Goals:
 In essence `Json` is just a thin wrapper around a `Map` where properties are stored. There are lots of functions to manipulate a `Map` such as in Guava or Apache Commons, and you should be able to re-use them. Additional `Map` utilities are provided here. 
 
 ```java
-     Json addr = new Json() {
+    Json addr = new Json() {
     	String host = "localhost";
     	int port = 80;
     };
